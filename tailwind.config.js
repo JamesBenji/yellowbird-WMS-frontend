@@ -153,6 +153,7 @@ module.exports = {
       cyan: colors.cyan,
       sky: colors.sky,
       blue: colors.blue,
+      app_blue: colors.FRONTEND_BLUE,
       indigo: colors.indigo,
       violet: colors.violet,
       purple: colors.purple,
@@ -302,6 +303,7 @@ module.exports = {
     },
     fontFamily: {
       sans: [
+        'Inter',
         'ui-sans-serif',
         'system-ui',
         'sans-serif',
@@ -1059,5 +1061,7 @@ module.exports = {
       50: '50'
     }
   },
-  plugins: []
+  plugins: [
+    require('tailwind-scrollbar')
+  ]
 }

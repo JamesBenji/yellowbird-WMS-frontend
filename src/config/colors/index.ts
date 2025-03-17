@@ -1,0 +1,8 @@
+export const BLUE = '#0071E3'
+// export const YELLOW = '#FDD60A'
+export const YELLOW = '#F7C600'
+export const PURPLE = '#BF5AF2'
+export const GREEN = '#32D158'
+export const RED = '#FF3037'
+export const ORANGE = '#FF9F0A'
+export const BG_GREY = '#F3F4F6'
