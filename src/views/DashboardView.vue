@@ -1,141 +1,138 @@
 <template>
-    <div class="min-h-screen p-4 md:p-8" :style="{backgroundColor: BG_GREY}">
-        <!-- Header -->
-        <header class="mb-8">
-            <h1 class="text-4xl font-bold" :style="{color: YELLOW}">Dashboard</h1>
-        </header>
+  <div class="min-h-screen p-4 md:p-8" :style="{ backgroundColor: BG_GREY }">
+    <!-- Header -->
+    <header class="mb-8">
+      <h1 class="text-4xl font-bold ">DASHBOARD</h1>
+    </header>
 
-        <!-- Stats Cards -->
-        <div class="w-full overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-200 mb-4 pb-2 scrollbar-track-white">
-            <div class="grid grid-flow-col auto-cols-max gap-4 ">
-                <!-- Stock In Card -->
-                <StatsCard title="Stock In" :value="stockInPending.toString()"
-                    :percentage="stockInReceivedPercentage + '%'" iconSrc="/icons/stock-in.svg"
-                    info="This is a stock in card">
-                    <div class="flex flex-col">
-                        <div class="flex items-baseline">
-                            <p class="text-2xl w-full font-semibold text-gray-900 text-center">{{ stockInPending }} / {{
-                                stockInReceived }}</p>
-                        </div>
-                        <p class="text-xs text-gray-500 mt-1">Pending / Received</p>
-                        <TrendChart v-if="stockInTrendData.length > 0 && stockInTrendLabels.length > 0"
-                            :data="stockInTrendData" :labels="stockInTrendLabels" class="mt-2 h-20"
-                            :line-color="BLUE" />
-                        <div v-else class="text-xs text-gray-500 mt-2">No trend data available</div>
-                    </div>
-                </StatsCard>
-
-                <!-- Inspections Card -->
-                <StatsCard title="Inspections" :value="inspectionsPending.toString()"
-                    :percentage="inspectionsPassRate + '%'" iconSrc="/icons/inspection.svg" iconClass="bg-purple-500">
-                    <div class="flex flex-col">
-                        <div class="flex items-baseline">
-                            <p class="text-2xl font-semibold text-gray-900">{{ inspectionsPending }} / {{
-                                inspectionsCompleted }}</p>
-                        </div>
-                        <p class="text-xs text-gray-500 mt-1">Pending / Completed</p>
-                        <TrendChart v-if="inspectionsTrendData.length > 0" :data="inspectionsTrendData"
-                            :labels="inspectionsTrendLabels" class="mt-2 h-20" :line-color="GREEN" />
-                        <div class="mt-2 flex justify-between text-xs text-gray-600">
-                            <span>Pass: {{ inspectionsPassed }}</span>
-                            <span>Fail: {{ inspectionsFailed }}</span>
-                        </div>
-                    </div>
-                </StatsCard>
-
-                <!-- Putaway Card -->
-                <StatsCard title="Put-away" :value="putawayPending.toString()" :percentage="putawayEfficiency + '%'"
-                    iconSrc="/icons/putaway.svg" iconClass="bg-green-500">
-                    <div class="flex flex-col">
-                        <div class="flex items-baseline">
-                            <p class="text-2xl font-semibold text-gray-900">{{ putawayPending }} / {{ putawayCompleted
-                            }}</p>
-                        </div>
-                        <p class="text-xs text-gray-500 mt-1">Pending / Completed</p>
-                        <TrendChart v-if="putawayTrendData.length > 0" :data="putawayTrendData"
-                            :labels="putawayTrendLabels" class="mt-2 h-20" :line-color="ORANGE" />
-                        <div class="mt-2 flex justify-between text-xs text-gray-600">
-                            <span>Avg Time: {{ putawayAvgTime }}h</span>
-                            <span>Priority: {{ putawayPriority }}</span>
-                        </div>
-                    </div>
-                </StatsCard>
-
-                <!-- Stocks Out Card -->
-                <StatsCard title="Stock Out" :value="stockOutProcessing.toString()"
-                    :percentage="stockOutDispatchedPercentage + '%'" iconSrc="/icons/stock-out.svg"
-                    info="This is a stock-out in card">
-                    <div class="flex flex-col">
-                        <div class="flex items-baseline">
-                            <p class="text-2xl font-semibold text-gray-900">{{ stockOutProcessing }} / {{
-                                stockOutDispatched }}</p>
-                        </div>
-                        <p class="text-xs text-gray-500 mt-1">Processing / Dispatched</p>
-                        <TrendChart v-if="stockOutTrendData.length > 0 && stockOutTrendLabels.length > 0"
-                            :data="stockOutTrendData" :labels="stockOutTrendLabels" class="mt-2 h-20"
-                            :line-color="YELLOW" />
-                        <div v-else class="text-xs text-gray-500 mt-2">No trend data available</div>
-                        <div class="mt-2 flex justify-between text-xs text-gray-600">
-                            <span>Total Items: {{ stockOutTotalItems }}</span>
-                            <span>Total Quantity: {{ stockOutTotalQuantity }}</span>
-                        </div>
-                    </div>
-                </StatsCard>
-
-                <!-- Returns Card -->
-                <StatsCard title="Returns" :value="returnsPending.toString()"
-                    :percentage="returnsReceivedPercentage + '%'" iconSrc="/icons/return.svg"
-                    info="This is a return card">
-                    <div class="flex flex-col">
-                        <div class="flex items-baseline">
-                            <p class="text-2xl font-semibold text-gray-900">{{ returnsPending }} / {{ returnsReceived }}
-                            </p>
-                        </div>
-                        <p class="text-xs text-gray-500 mt-1">Pending / Received</p>
-                        <TrendChart v-if="returnsTrendData.length > 0 && returnsTrendLabels.length > 0"
-                            :data="returnsTrendData" :labels="returnsTrendLabels" class="mt-2 h-20"
-                            :line-color="PURPLE" />
-                        <div v-else class="text-xs text-gray-500 mt-2">No trend data available</div>
-                        <div class="mt-2 flex justify-between text-xs text-gray-600">
-                            <span>Inspections: {{ returnsInspectionsPending }}</span>
-                            <span>Completed: {{ returnsCompleted }}</span>
-                        </div>
-                    </div>
-                </StatsCard>
+    <!-- Stats Cards -->
+    <div class="w-full overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-200 mb-4 pb-2 scrollbar-track-white">
+      <div class="grid grid-flow-col auto-cols-max gap-4 ">
+        <!-- Stock In Card -->
+        <StatsCard title="Stock In" :value="stockInPending.toString()" :percentage="stockInReceivedPercentage + '%'"
+          iconSrc="/icons/stock-in.svg" info="This is a stock in card" linkPath="/stock-in">
+          <div class="flex flex-col">
+            <div class="flex items-baseline">
+              <p class="text-2xl w-full font-semibold text-gray-900 text-center">{{ stockInPending }} / {{
+                stockInReceived }}</p>
             </div>
-        </div>
+            <p class="text-xs text-gray-500 mt-1 text-center">Pending / Received</p>
+            <TrendChart v-if="stockInTrendData.length > 0 && stockInTrendLabels.length > 0" :data="stockInTrendData"
+              :labels="stockInTrendLabels" class="mt-2 h-20" :line-color="BLUE" />
+            <div v-else class="text-xs text-gray-500 mt-2">No trend data available</div>
+          </div>
+        </StatsCard>
 
-        <!-- Main Content Sections -->
-        <div class="space-y-6">
-            <!-- Stock In Section -->
-            <DashboardSection title="Stock In">
-                <DataTable
-                    :headers="['$/N', 'Incoming Stock ID', 'Arrival Date/Time', 'Warehouse ID', 'Total Items', 'Receiver ID', 'Comments', 'Last Updated']"
-                    :rows="sampleStockInData" />
-            </DashboardSection>
+        <!-- Inspections Card -->
+        <StatsCard title="Inspections" :value="inspectionsPending.toString()" :percentage="inspectionsPassRate + '%'"
+          iconSrc="/icons/inspection.svg" iconClass="bg-purple-500" info="This is an inspections card" linkPath="/inspections">
+          <div class="flex flex-col">
+            <div class="flex items-baseline">
+              <p class="text-2xl w-full font-semibold text-gray-900 text-center">{{ inspectionsPending }} / {{
+                inspectionsCompleted }}</p>
+            </div>
+            <p class="text-xs text-gray-500 mt-1 text-center">Pending / Completed</p>
+            <TrendChart v-if="inspectionsTrendData.length > 0" :data="inspectionsTrendData"
+              :labels="inspectionsTrendLabels" class="mt-2 h-20" :line-color="GREEN" />
+              <div v-else class="text-xs text-gray-500 mt-2">No trend data available</div>
+            <div class="mt-2 flex justify-between text-xs text-gray-600">
+              <span>Pass: {{ inspectionsPassed }}</span>
+              <span>Fail: {{ inspectionsFailed }}</span>
+            </div>
+          </div>
+        </StatsCard>
 
-            <!-- Put-away Section -->
-            <DashboardSection title="Put-away">
-                <DataTable
-                    :headers="['$/N', 'Batch No', 'Item SKU', 'Item Name', 'Warehouse ID', 'Status', 'Quantity', 'Nearest Expiration', 'Vendor ID', 'Last Updated']"
-                    :rows="samplePutAwayData" />
-            </DashboardSection>
+        <!-- Putaway Card -->
+        <StatsCard title="Put-away" :value="putawayPending.toString()" :percentage="putawayEfficiency + '%'"
+          iconSrc="/icons/putaway.svg" iconClass="bg-green-500" info="This is a put-away card" linkPath="/put-away">
+          <div class="flex flex-col">
+            <div class="flex items-baseline">
+              <p class="text-2xl w-full font-semibold text-gray-900 text-center">{{ putawayPending }} / {{ putawayCompleted
+              }}</p>
+            </div>
+            <p class="text-xs text-gray-500 mt-1 text-center">Pending / Completed</p>
+            <TrendChart v-if="putawayTrendData.length > 0" :data="putawayTrendData" :labels="putawayTrendLabels"
+              class="mt-2 h-20" :line-color="ORANGE" />
+              <div v-else class="text-xs text-gray-500 mt-2">No trend data available</div>
+            <div class="mt-2 flex justify-between text-xs text-gray-600">
+              <span>Avg Time: {{ putawayAvgTime }}h</span>
+              <span>Priority: {{ putawayPriority }}</span>
+            </div>
+          </div>
+        </StatsCard>
 
-            <!-- Stock Out Section -->
-            <DashboardSection title="Stock Out">
-                <DataTable
-                    :headers="['$/N', 'Order ID', 'Total Items', 'Total Quantity', 'Key Item Name', 'Destination Address', 'Logistics Provider', 'Company ID', 'Comments', 'Last Updated']"
-                    :rows="sampleStockOutData" />
-            </DashboardSection>
+        <!-- Stocks Out Card -->
+        <StatsCard title="Stock Out" :value="stockOutProcessing.toString()"
+          :percentage="stockOutDispatchedPercentage + '%'" iconSrc="/icons/stock-out.svg"
+          info="This is a stock-out in card" linkPath="/stock-in">
+          <div class="flex flex-col">
+            <div class="flex items-baseline">
+              <p class="text-2xl w-full font-semibold text-gray-900 text-center">{{ stockOutProcessing }} / {{
+                stockOutDispatched }}</p>
+            </div>
+            <p class="text-xs text-gray-500 mt-1 text-center">Processing / Dispatched</p>
+            <TrendChart v-if="stockOutTrendData.length > 0 && stockOutTrendLabels.length > 0" :data="stockOutTrendData"
+              :labels="stockOutTrendLabels" class="mt-2 h-20" :line-color="YELLOW" />
+            <div v-else class="text-xs text-gray-500 mt-2">No trend data available</div>
+            <div class="mt-2 flex justify-between text-xs text-gray-600">
+              <span>Total Items: {{ stockOutTotalItems }}</span>
+              <span>Total Quantity: {{ stockOutTotalQuantity }}</span>
+            </div>
+          </div>
+        </StatsCard>
 
-            <!-- Returns Section -->
-            <DashboardSection title="Returns">
-                <DataTable
-                    :headers="['$/N', 'Dispatch date', 'Order No', 'Items', 'Received Items Count', 'Total Quantity', 'Inspection Status', 'Disposition Status', 'Completion Date', 'Last Updated']"
-                    :rows="sampleReturnsData" />
-            </DashboardSection>
-        </div>
+        <!-- Returns Card -->
+        <StatsCard title="Returns" :value="returnsPending.toString()" :percentage="returnsReceivedPercentage + '%'"
+          iconSrc="/icons/return.svg" info="This is a return card" linkPath="/stock-in">
+          <div class="flex flex-col">
+            <div class="flex items-baseline">
+              <p class="text-2xl w-full font-semibold text-gray-900 text-center">{{ returnsPending }} / {{ returnsReceived }}
+              </p>
+            </div>
+            <p class="text-xs text-gray-500 mt-1">Pending / Received</p>
+            <TrendChart v-if="returnsTrendData.length > 0 && returnsTrendLabels.length > 0" :data="returnsTrendData"
+              :labels="returnsTrendLabels" class="mt-2 h-20" :line-color="PURPLE" />
+            <div v-else class="text-xs text-gray-500 mt-2">No trend data available</div>
+            <div class="mt-2 flex justify-between text-xs text-gray-600">
+              <span>Inspections: {{ returnsInspectionsPending }}</span>
+              <span>Completed: {{ returnsCompleted }}</span>
+            </div>
+          </div>
+        </StatsCard>
+      </div>
     </div>
+
+    <!-- Main Content Sections -->
+    <div class="space-y-6">
+      <!-- Stock In Section -->
+      <DashboardSection title="Stock In">
+        <DataTable
+          :headers="['$/N', 'Incoming Stock ID', 'Arrival Date/Time', 'Warehouse ID', 'Total Items', 'Receiver ID', 'Comments', 'Last Updated']"
+          :rows="sampleStockInData" />
+      </DashboardSection>
+
+      <!-- Put-away Section -->
+      <DashboardSection title="Put-away">
+        <DataTable
+          :headers="['$/N', 'Batch No', 'Item SKU', 'Item Name', 'Warehouse ID', 'Status', 'Quantity', 'Nearest Expiration', 'Vendor ID', 'Last Updated']"
+          :rows="samplePutAwayData" />
+      </DashboardSection>
+
+      <!-- Stock Out Section -->
+      <DashboardSection title="Stock Out">
+        <DataTable
+          :headers="['$/N', 'Order ID', 'Total Items', 'Total Quantity', 'Key Item Name', 'Destination Address', 'Logistics Provider', 'Company ID', 'Comments', 'Last Updated']"
+          :rows="sampleStockOutData" />
+      </DashboardSection>
+
+      <!-- Returns Section -->
+      <DashboardSection title="Returns">
+        <DataTable
+          :headers="['$/N', 'Dispatch date', 'Order No', 'Items', 'Received Items Count', 'Total Quantity', 'Inspection Status', 'Disposition Status', 'Completion Date', 'Last Updated']"
+          :rows="sampleReturnsData" />
+      </DashboardSection>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -144,6 +141,7 @@ import DashboardSection from '../components/DashboardSection.vue'
 import DataTable from '../components/DataTable.vue'
 import TrendChart from '../components/TrendChart.vue'
 import { BLUE, YELLOW, PURPLE, ORANGE, GREEN, BG_GREY } from '../config/colors'
+// import DynamicLink from '@/components/dashboard/DynamicLink.vue'
 
 export default {
   components: {

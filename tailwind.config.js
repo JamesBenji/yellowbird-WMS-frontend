@@ -322,7 +322,8 @@ module.exports = {
         '"Liberation Mono"',
         '"Courier New"',
         'monospace'
-      ]
+      ],
+      quantico: ['Quantico', 'Inter', 'sans-serif']
     },
     fontSize: {
       xs: ['0.75rem', { lineHeight: '1rem' }],
