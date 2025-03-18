@@ -141,7 +141,6 @@ import DashboardSection from '../components/DashboardSection.vue'
 import DataTable from '../components/DataTable.vue'
 import TrendChart from '../components/TrendChart.vue'
 import { BLUE, YELLOW, PURPLE, ORANGE, GREEN, BG_GREY } from '../config/colors'
-// import DynamicLink from '@/components/dashboard/DynamicLink.vue'
 
 export default {
   components: {

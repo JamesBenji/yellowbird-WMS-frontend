@@ -2,13 +2,16 @@
 import IconViewer from './components/shared/IconViewer.vue'
 import { YELLOW } from './config/colors'
 
+const BRAND_NAME = 'yellowHOUSE\u2122'
+
 </script>
 
 <template>
   <nav class="bg-gray-900 py-4 px-6 md:px-8 text-[#f8f8f8] w-full">
-    <div>
+    <div class="flex items-center justify-between md:mb-1">
       <!-- warehouse logo -->
-       <span class="font-quantico select-none text-3xl" :style="{color: YELLOW}">yellowHOUSE</span>
+       <span class="font-quantico select-none text-3xl" :style="{color: YELLOW}">{{BRAND_NAME}}</span>
+       <span class="font-quantico select-none text-sm" :style="{color: YELLOW}">WAREHOUSE MANAGEMENT SYSTEM</span>
     </div>
 
     <div class="flex items-center gap-4 justify-end">

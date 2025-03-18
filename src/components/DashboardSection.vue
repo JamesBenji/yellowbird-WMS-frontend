@@ -3,7 +3,6 @@
       <div class=" flex items-center justify-between align-middle px-4 py-3 border-b border-gray-200">
         <h2 class="text-lg font-semibold text-gray-800">{{ title }}</h2>
         <!-- actions -->
-         <!-- create(orange), search(yellow), scan(green), view(blue) -->
           <div class="flex items-center mt-1">
 
             <div class="relative group">

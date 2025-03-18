@@ -64,7 +64,7 @@ withDefaults(defineProps<{
 </script>
 
 <style scoped>
-/* Optional: Keep color classes if needed for fallback */
+
 .bg-blue-500 {
   background-color: #3b82f6;
 }
